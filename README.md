@@ -51,8 +51,10 @@ Deps
     "spotify-web-api-node": "^4.0.0"
 ```
 ```
-    "postpack": "rm -f oclif.manifest.json && cp plugin-search-0.0.0.tgz /Users/gchodwadia/Desktop/svcc/npmlibs",
-    "prepack": "rm -rf lib && rm -rf tsconfig.tsbuildinfo && tsc -b && oclif-dev manifest && oclif-dev readme",
+    "postpack": "rm -f oclif.manifest.json",
+    "prepack": "rm -rf lib && rm -f tsconfig.tsbuildinfo && tsc -b && oclif-dev manifest && oclif-dev readme",
+    "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
+    "version": "oclif-dev readme && git add README.md"
 ```
 -------------
 ```bash
