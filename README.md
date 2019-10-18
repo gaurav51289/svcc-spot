@@ -104,5 +104,58 @@ import { default as chalk } from 'chalk';
 import { SpotApi } from '../spot-api';
 import * as inq from 'inquirer';
 inq.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
+```
+
+```typescript
+ await inq.prompt([
+      {
+        type: "autocomplete",
+        name: "track",
+        message: "Search a track",
+        source: async (answers: any, input: string) => {
+          return new Promise<any>((resolve, reject) => {
+        });
+        }
+      }
+    ]).then(async (sel: any) => {
+      await osa.play(sel.track.uri);
+    });
+```
+
+
+```typescript
+ await inq.prompt([
+      {
+        type: "autocomplete",
+        name: "track",
+        message: "Search a track",
+        source: async (answers: any, input: string) => {
+          return new Promise<any>((resolve, reject) => {
+            if (!input) {
+              resolve([]);
+              return;
+            }
+            this.spotApi
+              .search(input)
+              .then((items: any[]) => {
+                resolve(
+                  items.map(item => {
+                    return {
+                      name: `${item.name} - ${item.album.name}`,
+                      value: item
+                    };
+                  })
+                );
+              })
+              .catch(err => {
+                reject(err);
+              });
+          });
+        }
+      }
+    ]).then(async (sel: any) => {
+      await osa.play(sel.track.uri);
+    });
 
 ```
+
