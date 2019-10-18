@@ -94,3 +94,13 @@ export class SpotApi {
 }
 ```
 
+search.ts
+```typescript
+import * as osa from 'spot-osa';
+const imgcat = require('imgcat');
+import { default as chalk } from 'chalk';
+import { SpotApi } from '../spot-api';
+import * as inq from 'inquirer';
+inq.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
+
+```
