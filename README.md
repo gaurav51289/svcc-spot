@@ -156,6 +156,16 @@ inq.registerPrompt('autocomplete', require('inquirer-autocomplete-prompt'));
     ]).then(async (sel: any) => {
       await osa.play(sel.track.uri);
     });
+    
+    await osa.status().then(async (status: any) => {
+      await imgcat(status.artwork, { log: true, height: 8 });
+      this.log(`${chalk.cyanBright("Now Playing ... ")} ${status.track}`);
+      this.log(`From ${chalk.yellowBright(status.album)}`);
+      this.log(`By ${chalk.yellowBright(status.artist)}`);
+      this.log(
+        `Elapsed ${chalk.redBright(status.position)} of ${status.duration}`
+      );
+    });
 
 ```
 
