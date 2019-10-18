@@ -35,7 +35,8 @@ Print
       this.log(`Elapsed ${chalk.redBright(status.position)} of ${status.duration}`);
 ```
 
-
+-------------------
+-------------------
 
 
 # plugin-search
@@ -53,5 +54,43 @@ Deps
     "postpack": "rm -f oclif.manifest.json && cp plugin-search-0.0.0.tgz /Users/gchodwadia/Desktop/svcc/npmlibs",
     "prepack": "rm -rf lib && rm -rf tsconfig.tsbuildinfo && tsc -b && oclif-dev manifest && oclif-dev readme",
 ```
+-------------
+```bash
+$ touch src/spot-api.ts
+```
+```typescript
+// @ts-ignore
+import * as Spotify from 'spotify-web-api-node';
+import * as dotenv from 'dotenv';
 
+export class SpotApi {
+
+  private spotify: Spotify;
+
+  constructor() {
+    dotenv.config();
+    this.spotify = new Spotify({
+      clientId: '491abdfe39e145c4b9d9df8480cbfe85',
+      clientSecret: '24401904a7d74bb5aaa466c94aab97d0'
+    });
+  }
+
+
+  public search = (query: string): Promise<any> => {
+    return new Promise<any>((resolve, reject) => {
+      this.spotify.clientCredentialsGrant().then((data) => {
+        this.spotify.setAccessToken(data.body['access_token']);
+        this.spotify.searchTracks(query,{ limit: 20 }).then((data: any) => {
+          resolve(data.body.tracks.items);
+        }).catch(err => {
+          reject(err);
+        });
+      }).catch(err => {
+        console.log(err);
+        reject(err);
+      });
+    });
+  }
+}
+```
 
