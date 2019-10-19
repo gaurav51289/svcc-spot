@@ -51,10 +51,10 @@ Deps
     "spotify-web-api-node": "^4.0.0"
 ```
 ```
-    "postpack": "rm -f oclif.manifest.json",
-    "prepack": "rm -rf lib && rm -f tsconfig.tsbuildinfo && tsc -b && oclif-dev manifest && oclif-dev readme",
-    "test": "nyc --extension .ts mocha --forbid-only \"test/**/*.test.ts\"",
-    "version": "oclif-dev readme && git add README.md"
+    "@types/bluebird": "^3.5.28",
+    "@types/dotenv": "^6.1.1",
+    "@types/inquirer": "^6.5.0",
+    "@types/spotify-web-api-node": "^4.0.1"
 ```
 -------------
 ```bash
