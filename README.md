@@ -28,7 +28,7 @@ Arg
 
 Print
 ```javascript
-      imgcat(status.artwork, { log: true, heightc: 8 });
+      imgcat(status.artwork, { log: true, height: 8 });
       this.log(`${chalk.cyanBright('Now Playing ... ')} ${status.track}`);
       this.log(`From ${chalk.yellowBright(status.album)}`);
       this.log(`By ${chalk.yellowBright(status.artist)}`);
